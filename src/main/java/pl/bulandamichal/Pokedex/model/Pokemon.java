@@ -23,4 +23,6 @@ public class Pokemon {
     @Enumerated(EnumType.STRING)
     private PokemonType type;
 
+    private int power;
+
 }
