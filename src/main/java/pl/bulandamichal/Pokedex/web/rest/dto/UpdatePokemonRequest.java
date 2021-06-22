@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreatePokemonRequest {
+public class UpdatePokemonRequest {
 
     @NotBlank(message = "Name cannot be blank")
     private String name;

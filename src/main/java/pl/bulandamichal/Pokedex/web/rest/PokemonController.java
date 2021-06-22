@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.bulandamichal.Pokedex.service.CreatePokemonService;
 import pl.bulandamichal.Pokedex.service.GetPokemonService;
-import pl.bulandamichal.Pokedex.web.rest.dto.CreatePokemonRequest;
-import pl.bulandamichal.Pokedex.web.rest.dto.CreatePokemonResponse;
-import pl.bulandamichal.Pokedex.web.rest.dto.GetAllPokemonsResponse;
-import pl.bulandamichal.Pokedex.web.rest.dto.GetPokemonResponse;
+import pl.bulandamichal.Pokedex.service.UpdatePokemonService;
+import pl.bulandamichal.Pokedex.web.rest.dto.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -21,6 +19,7 @@ public class PokemonController {
 
     private final CreatePokemonService createPokemonService;
     private final GetPokemonService getPokemonService;
+    private final UpdatePokemonService updatePokemonService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,5 +37,11 @@ public class PokemonController {
     @ResponseStatus(HttpStatus.OK)
     public GetAllPokemonsResponse getAllPokemons(){
         return getPokemonService.getAllPokemons();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UpdatePokemonResponse updatePokemon(@PathVariable Long id, @RequestBody @Valid UpdatePokemonRequest request){
+        return updatePokemonService.updatePokemon(id, request);
     }
 }
