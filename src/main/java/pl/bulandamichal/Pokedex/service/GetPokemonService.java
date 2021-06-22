@@ -1,6 +1,7 @@
 package pl.bulandamichal.Pokedex.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.bulandamichal.Pokedex.model.PokemonType;
 import pl.bulandamichal.Pokedex.repository.PokemonRepository;
@@ -35,6 +36,15 @@ public class GetPokemonService {
     public GetPokemonsByTypeResponse getPokemonsByType(String type){
         return GetPokemonsByTypeResponse.builder()
                 .pokemons(pokemonRepository.findByType(PokemonType.fromString(type)).stream()
+                        .map(getPokemonMapper::toDto)
+                        .collect(Collectors.toList())
+                )
+                .build();
+    }
+
+    public GetAllPokemonsResponse getAllPokemons(Pageable page){
+        return GetAllPokemonsResponse.builder()
+                .pokemons(pokemonRepository.findAll(page).stream()
                         .map(getPokemonMapper::toDto)
                         .collect(Collectors.toList())
                 )

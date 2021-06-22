@@ -1,6 +1,7 @@
 package pl.bulandamichal.Pokedex.web.rest;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.bulandamichal.Pokedex.model.PokemonType;
@@ -36,7 +37,7 @@ public class PokemonController {
         return getPokemonService.getPokemonById(id);
     }
 
-    @GetMapping
+    @GetMapping(params = {"!page", "!size"})
     @ResponseStatus(HttpStatus.OK)
     public GetAllPokemonsResponse getAllPokemons(){
         return getPokemonService.getAllPokemons();
@@ -46,6 +47,12 @@ public class PokemonController {
     @ResponseStatus(HttpStatus.OK)
     public GetPokemonsByTypeResponse getPokemonsByType(@PathVariable String type){
         return getPokemonService.getPokemonsByType(type);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public GetAllPokemonsResponse getAllPokemons(Pageable page){
+        return getPokemonService.getAllPokemons(page);
     }
 
     @PutMapping("/{id}")
