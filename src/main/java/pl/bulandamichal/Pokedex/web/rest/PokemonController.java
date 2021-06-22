@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.bulandamichal.Pokedex.service.CreatePokemonService;
+import pl.bulandamichal.Pokedex.service.DeletePokemonService;
 import pl.bulandamichal.Pokedex.service.GetPokemonService;
 import pl.bulandamichal.Pokedex.service.UpdatePokemonService;
 import pl.bulandamichal.Pokedex.web.rest.dto.*;
@@ -20,6 +21,7 @@ public class PokemonController {
     private final CreatePokemonService createPokemonService;
     private final GetPokemonService getPokemonService;
     private final UpdatePokemonService updatePokemonService;
+    private final DeletePokemonService deletePokemonService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,5 +45,11 @@ public class PokemonController {
     @ResponseStatus(HttpStatus.OK)
     public UpdatePokemonResponse updatePokemon(@PathVariable Long id, @RequestBody @Valid UpdatePokemonRequest request){
         return updatePokemonService.updatePokemon(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePokemonById(@PathVariable Long id){
+        deletePokemonService.deletePokemonById(id);
     }
 }
