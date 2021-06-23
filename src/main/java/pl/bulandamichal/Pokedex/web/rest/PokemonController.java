@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.bulandamichal.Pokedex.model.PokemonType;
 import pl.bulandamichal.Pokedex.service.CreatePokemonService;
 import pl.bulandamichal.Pokedex.service.DeletePokemonService;
 import pl.bulandamichal.Pokedex.service.GetPokemonService;
@@ -43,10 +42,16 @@ public class PokemonController {
         return getPokemonService.getAllPokemons();
     }
 
-    @GetMapping("/pokemon/{type}")
+    @GetMapping("/type/{type}")
     @ResponseStatus(HttpStatus.OK)
     public GetPokemonsByTypeResponse getPokemonsByType(@PathVariable String type){
         return getPokemonService.getPokemonsByType(type);
+    }
+
+    @GetMapping("/pokemon/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public GetPokemonResponse getPokemonByName(@PathVariable String name){
+        return getPokemonService.getPokemonByName(name);
     }
 
     @GetMapping

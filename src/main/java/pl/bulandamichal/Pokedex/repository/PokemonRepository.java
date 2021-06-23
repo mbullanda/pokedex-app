@@ -7,6 +7,7 @@ import pl.bulandamichal.Pokedex.model.Pokemon;
 import pl.bulandamichal.Pokedex.model.PokemonType;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 
@@ -14,4 +15,6 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 
     @Override
     Page<Pokemon> findAll(Pageable page);
+
+    Optional<Pokemon> findByName(String name);
 }
