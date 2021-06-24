@@ -11,3 +11,11 @@ App is using h2 database:
 -url: jdbc:h2:mem:testdb
 -login: sa
 -password: password
+
+App has two users:
+-user (password: password),
+-admin (password: password).
+
+To show simple authentication:
+-only admin has the permit to create new pokemon (http method: POST). 
+-user is able to use other http methods.
